@@ -7,6 +7,8 @@
 using System;
 using System.Collections;
 
+//cumplo expert y rsp ya que implemente una interface para no estar compartiendo los metodos entre clases, entiendo que al heredarlas se cumplen estos patrones 
+
 namespace Full_GRASP_And_SOLID.Library
 {
     public class Recipe
@@ -27,10 +29,12 @@ namespace Full_GRASP_And_SOLID.Library
 
         public void PrintRecipe()
         {
-            Console.WriteLine($"Receta de {this.FinalProduct.Description}:");
+            IConsolePrinter consolePrinter = new ConsolePrinter();
+            consolePrinter.Print(this.FinalProduct.Description);
+
             foreach (Step step in this.steps)
             {
-                Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
+                consolePrinter.Print($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
             }
         }
